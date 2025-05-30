@@ -6,12 +6,38 @@ const LoginPage = () => {
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
 
     e.preventDefault()
 
     console.log(username);
     console.log(password);
+
+    try{
+        const response = await fetch("http://localhost:3001/api/login",{
+            method: "POST",
+            headers: {
+                "Content-Type": "application/Json"
+            },
+            body: JSON.stringify({
+                user: {
+                    username : username,
+                    password : password
+                }
+            })
+        })
+        // .then(
+        //     await fetch("http://localhost:3000/home",{
+        //         method: "GET",
+        //         headers: {
+        //             "Content-Type": 
+        //         }
+        //     })
+        // );
+    }
+    catch(e){
+        console.error(e);
+    }
 
 }
 
