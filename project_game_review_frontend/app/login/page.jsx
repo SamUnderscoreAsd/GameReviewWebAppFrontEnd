@@ -26,6 +26,12 @@ const handleSubmit = async (e) => {
                 }
             })
         })
+        .then(response =>{
+            return response.json();
+        })
+        .then(data =>{
+            console.log(data);
+        })
         // .then(
         //     await fetch("http://localhost:3000/home",{
         //         method: "GET",
