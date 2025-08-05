@@ -32,14 +32,6 @@ const handleSubmit = async (e) => {
         .then(data =>{
             console.log(data);
         })
-        // .then(
-        //     await fetch("http://localhost:3000/home",{
-        //         method: "GET",
-        //         headers: {
-        //             "Content-Type": 
-        //         }
-        //     })
-        // );
     }
     catch(e){
         console.error(e);
@@ -73,6 +65,9 @@ const handleSubmit = async (e) => {
                     <button type="submit" className = "bg-blue-500 px-3 text-center rounded-md">Submit</button>
                 </div>
                 </form>
+                <div>
+                    <p>Don't have an account? <a href="/register">Register Here!</a></p>
+                </div>
             </div>
         </div>
     </div>
