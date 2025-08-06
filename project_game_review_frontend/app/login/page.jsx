@@ -1,10 +1,11 @@
 'use client'
 import React from 'react'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const LoginPage = () => {
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
+const router = useRouter();
 
 const handleSubmit = async (e) => {
 
@@ -24,13 +25,14 @@ const handleSubmit = async (e) => {
                     username : username,
                     password : password
                 }
-            })
+            }) 
         })
         .then(response =>{
             return response.json();
         })
         .then(data =>{
-            console.log(data);
+            console.log('Data: ' +data);
+            //TODO useRouter to redirect user to the main page after
         })
     }
     catch(e){
