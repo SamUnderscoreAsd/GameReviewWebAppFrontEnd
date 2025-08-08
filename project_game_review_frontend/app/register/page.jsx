@@ -1,4 +1,5 @@
 "use client";
+import { redirect } from "next/navigation";
 import React from "react";
 import { useState } from "react";
 
@@ -12,7 +13,7 @@ const RegisterPage = () => {
 
     const url = "http://localhost:3001/api/createUser";
     try {
-      const reponse = fetch(url, {
+      const response = await fetch(url, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
@@ -25,7 +26,16 @@ const RegisterPage = () => {
           },
         }),
       });
+
+
+      if (response.ok){
+        console.log("response.ok = " + response.ok)
+        redirect("/home");
+      }
     } catch (e) {
+      if (e.digest?.includes("NEXT_REDIRECT")) {
+          throw e;
+        }
       console.error(e);
     }
   };

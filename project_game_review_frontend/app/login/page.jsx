@@ -1,4 +1,5 @@
 'use client'
+import { redirect } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react'
 
@@ -10,8 +11,8 @@ const handleSubmit = async (e) => {
 
     e.preventDefault()
 
-    console.log(username);
-    console.log(password);
+    // console.log(username);
+    // console.log(password);
 
     try{
         const response = await fetch("http://localhost:3001/api/login",{
@@ -26,14 +27,18 @@ const handleSubmit = async (e) => {
                 }
             })
         })
-        .then(response =>{
-            return response.json();
-        })
-        .then(data =>{
-            console.log(data);
-        })
+
+        const data = await response.json();
+        if (data) {
+            //meaning that if the use is properly authenticated
+            console.log(data + "Sending user to home page");
+            redirect("/home");
+        }
     }
     catch(e){
+        if (e.digest?.includes("NEXT_REDIRECT")) {
+          throw e;
+        }
         console.error(e);
     }
 
