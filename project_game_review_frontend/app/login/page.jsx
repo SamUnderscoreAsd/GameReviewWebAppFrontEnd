@@ -1,11 +1,12 @@
 'use client'
 import { redirect } from 'next/navigation';
 import React from 'react'
-import { useState } from 'react'
+import { useRouter } from 'next/router'
 
 const LoginPage = () => {
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
+const router = useRouter();
 
 const handleSubmit = async (e) => {
 
@@ -25,7 +26,7 @@ const handleSubmit = async (e) => {
                     username : username,
                     password : password
                 }
-            })
+            }) 
         })
 
         const data = await response.json();
