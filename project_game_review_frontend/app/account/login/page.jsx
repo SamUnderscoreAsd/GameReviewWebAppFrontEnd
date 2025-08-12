@@ -1,12 +1,11 @@
 'use client'
 import { redirect } from 'next/navigation';
 import React from 'react'
-import { useRouter } from 'next/router'
+import { useState } from 'react'
 
 const LoginPage = () => {
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
-const router = useRouter();
 
 const handleSubmit = async (e) => {
 
@@ -33,7 +32,7 @@ const handleSubmit = async (e) => {
         if (data) {
             //meaning that if the use is properly authenticated
             console.log(data + "Sending user to home page");
-            redirect("/home");
+            redirect("/");
         }
     }
     catch(e){
@@ -72,7 +71,7 @@ const handleSubmit = async (e) => {
                 </div>
                 </form>
                 <div>
-                    <p>Don't have an account? <a href="/register">Register Here!</a></p>
+                    <p>Don't have an account? <a href="/account/register">Register Here!</a></p>
                 </div>
             </div>
         </div>

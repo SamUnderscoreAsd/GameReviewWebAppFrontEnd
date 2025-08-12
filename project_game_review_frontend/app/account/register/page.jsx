@@ -30,7 +30,7 @@ const RegisterPage = () => {
 
       if (response.ok){
         console.log("response.ok = " + response.ok)
-        redirect("/home");
+        redirect("/");
       }
     } catch (e) {
       if (e.digest?.includes("NEXT_REDIRECT")) {
@@ -85,7 +85,7 @@ const RegisterPage = () => {
             </form>
             <div>
               <p>
-                Already have an account? <a href="/login">Login Here!</a>
+                Already have an account? <a href="/account/login">Login Here!</a>
               </p>
             </div>
           </div>
