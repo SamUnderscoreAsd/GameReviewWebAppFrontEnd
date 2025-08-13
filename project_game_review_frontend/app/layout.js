@@ -2,8 +2,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Icon } from "lucide-react";
 import { User } from "lucide-react";
 import navbar from "@/components/navbar";
-import "./globals.css";
 import Navbar from "@/components/navbar";
+import "./globals.css";;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -20,12 +20,21 @@ export const metadata = {
   description: "A platform to see and share your options of games.",
 };
 
-export default function RootLayout({ children }) {
+export default function accountLayout({ children }) {
 
   return (
-      <>
-        <Navbar/>
+    <html lang="en">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center`}
+      >
+        <header className="bg-green-500 w-full text-center p-6 flex flex-row justify-between">
+          <div>
+            <p className="bg-black-100">{metadata.title}</p>
+          </div>
+        </header>
         {children}
-      </>
+        <footer className="bg-green-500 w-full text-center p-6">FOOTER</footer>
+      </body>
+    </html>
   );
 }

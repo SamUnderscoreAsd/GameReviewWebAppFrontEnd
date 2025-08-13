@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { Icon } from "lucide-react";
 import { User } from "lucide-react";
 import navbar from "@/components/navbar";
+import "../globals.css";
 import Navbar from "@/components/navbar";
 
 const geistSans = Geist({
@@ -19,21 +20,12 @@ export const metadata = {
   description: "A platform to see and share your options of games.",
 };
 
-export default function accountLayout({ children }) {
+export default function RootLayout({ children }) {
 
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center`}
-      >
-        <header className="bg-green-500 w-full text-center p-6 flex flex-row justify-between">
-          <div>
-            <p className="bg-black-100">{metadata.title}</p>
-          </div>
-        </header>
+      <>
+        <Navbar/>
         {children}
-        <footer className="bg-green-500 w-full text-center p-6">FOOTER</footer>
-      </body>
-    </html>
+      </>
   );
 }
