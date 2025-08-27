@@ -45,10 +45,12 @@ const handleSubmit = async (e) => {
 }
 
   return (
-    <div className = "p-20 h-full w-full">
-        <div className = "bg-white m-auto p-6 h-[50rem] w-2/5 rounded-md">
-            <div className = "text-black m-auto text-center ">
-                Login
+    <div className = "p-20 m-auto min-h-screen w-full flex flex-row">
+        <div className = "bg-white m-auto p-6 w-1/3 rounded-md">
+            <div className = "text-black m-auto text-center">
+                <div className = "text-4xl">
+                    Login
+                </div>
                 <form onSubmit={handleSubmit}>
                 <div className = "p-6">
                     <input 
@@ -56,7 +58,7 @@ const handleSubmit = async (e) => {
                     type="username" 
                     placeholder='Username' 
                     onChange = {(e) => setUsername(e.target.value)}
-                    className="px-3 bg-gray-700 text-white rounded-md"></input>
+                    className="px-3 w-9/12 h-7 bg-gray-700 text-white rounded-md"></input>
                 </div>
                 <div className = "p-6">
                     <input 
@@ -64,14 +66,14 @@ const handleSubmit = async (e) => {
                     type = "password" 
                     placeholder='Password' 
                     onChange = {(e) => setPassword(e.target.value)}
-                    className="px-3 bg-gray-700 text-white rounded-md"></input>
+                    className="px-3 w-9/12 h-7 bg-gray-700 text-white rounded-md"></input>
                 </div>
                 <div>
-                    <button type="submit" className = "bg-blue-500 px-3 text-center rounded-md">Submit</button>
+                    <button type="submit" className = "bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-green-500">Submit</button>
                 </div>
                 </form>
                 <div>
-                    <p>Don't have an account? <a href="/account/register">Register Here!</a></p>
+                    <p>Don't have an account? <a className='hover:text-green-500' href="/account/register">Register Here!</a></p>
                 </div>
             </div>
         </div>

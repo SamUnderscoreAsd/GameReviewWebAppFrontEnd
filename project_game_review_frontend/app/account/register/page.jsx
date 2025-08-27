@@ -42,10 +42,12 @@ const RegisterPage = () => {
 
   return (
     <>
-      <div className="p-20 h-full w-full">
-        <div className="bg-white m-auto p-6 h-[50rem] w-2/5 rounded-md">
+      <div className="p-20 m-auto min-h-screen w-full flex flex-row">
+        <div className="bg-white m-auto p-6 w-1/3 rounded-md">
           <div className="text-black m-auto text-center ">
-            Register
+            <div className ="text-4xl">
+              Register
+            </div>
             <form onSubmit={handleSubmit}>
               <div className="p-6">
                 <input
@@ -53,7 +55,7 @@ const RegisterPage = () => {
                   type="username"
                   placeholder="Username"
                   onChange={(e) => setUsername(e.target.value)}
-                  className="px-3 bg-gray-700 text-white rounded-md"
+                  className="px-3 w-9/12 h-7 bg-gray-700 text-white rounded-md"
                 ></input>
               </div>
               <div className="p-6">
@@ -62,7 +64,7 @@ const RegisterPage = () => {
                   type="email"
                   placeholder="Email"
                   onChange={(e) => setEmail(e.target.value)}
-                  className="px-3 bg-gray-700 text-white rounded-md"
+                  className="px-3 w-9/12 h-7 bg-gray-700 text-white rounded-md"
                 ></input>
               </div>
               <div className="p-6">
@@ -71,13 +73,13 @@ const RegisterPage = () => {
                   type="password"
                   placeholder="Password"
                   onChange={(e) => setPassword(e.target.value)}
-                  className="px-3 bg-gray-700 text-white rounded-md"
+                  className="px-3 w-9/12 h-7 bg-gray-700 text-white rounded-md"
                 ></input>
               </div>
               <div>
                 <button
                   type="submit"
-                  className="bg-blue-500 px-3 text-center rounded-md"
+                  className="bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-green-500"
                 >
                   Submit
                 </button>
@@ -85,7 +87,7 @@ const RegisterPage = () => {
             </form>
             <div>
               <p>
-                Already have an account? <a href="/account/login">Login Here!</a>
+                Already have an account? <a className="hover:text-green-500" href="/account/login">Login Here!</a>
               </p>
             </div>
           </div>
