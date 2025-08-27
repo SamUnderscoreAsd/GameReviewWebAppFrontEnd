@@ -23,9 +23,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
 
   return (
-      <>
-        <Navbar/>
-        {children}
-      </>
+      <html>
+        <body>
+          {children}
+        </body>
+      </html>
   );
 }
