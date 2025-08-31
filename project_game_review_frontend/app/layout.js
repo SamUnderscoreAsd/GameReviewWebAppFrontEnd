@@ -25,15 +25,16 @@ export default function accountLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col items-center`}
-      >
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col `}>
         <header className="bg-green-500 w-full text-center p-6 flex flex-row justify-between">
           <div>
             <p className="bg-black-100">{metadata.title}</p>
           </div>
         </header>
+
         {children}
-        <footer className="bg-green-500 w-full text-center p-6">FOOTER</footer>
+        <div className="flex-grow"></div>
+        <footer className="bg-green-500  w-full text-center p-6">FOOTER</footer>
       </body>
     </html>
   );
