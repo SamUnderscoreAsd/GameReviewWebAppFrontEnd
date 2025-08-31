@@ -69,7 +69,7 @@ const handleSubmit = async (e) => {
                     className="px-3 w-9/12 h-7 bg-gray-700 text-white rounded-md"></input>
                 </div>
                 <div>
-                    <button type="submit" className = "bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-green-500">Submit</button>
+                    <button type="submit" className = "bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-blue-600">Submit</button>
                 </div>
                 </form>
                 <div>
