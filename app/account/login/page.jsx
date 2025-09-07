@@ -1,4 +1,5 @@
 'use client'
+import Alert from '@/components/alert';
 import { redirect } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react'
@@ -6,6 +7,12 @@ import { useState } from 'react'
 const LoginPage = () => {
 const [username, setUsername] = useState('');
 const [password, setPassword] = useState('');
+const [alert, setAlert] = useState(false);
+const [alertMessage, setAlertMessage] = useState('');
+
+//email string len <= 320
+//pass string len <= 100
+// user string len <= 20
 
 const handleSubmit = async (e) => {
 
@@ -14,6 +21,17 @@ const handleSubmit = async (e) => {
     // console.log(username);
     // console.log(password);
 
+    if(username.length > 20 || username.length < 1){
+        setAlert(true);
+        setAlertMessage('Please enter a valid username');
+        return
+    }
+    if(password.length > 100 || password.length < 1){
+        setAlert(true);
+        setAlertMessage('Please enter a valid password');
+        return
+    }
+    setAlert(false);
     try{
         const response = await fetch("http://localhost:3001/api/login",{
             method: "POST",
@@ -68,6 +86,7 @@ const handleSubmit = async (e) => {
                     onChange = {(e) => setPassword(e.target.value)}
                     className="px-3 w-9/12 h-7 bg-gray-700 text-white rounded-md"></input>
                 </div>
+                {alert ? <Alert message={alertMessage}/> : null}
                 <div>
                     <button type="submit" className = "bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-blue-600">Submit</button>
                 </div>
