@@ -1,6 +1,7 @@
 import React from 'react'
 
-export default Navbar => {
+
+export default function Navbar(){
 
     return <>
         <div className = "w-full p-2 flex flex-row justify-around items-center">
