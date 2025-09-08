@@ -1,4 +1,5 @@
 'use client'
+
 import Alert from '@/components/alert';
 import { redirect } from 'next/navigation';
 import React from 'react'

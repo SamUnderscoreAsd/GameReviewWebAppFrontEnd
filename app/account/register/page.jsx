@@ -29,7 +29,7 @@ const RegisterPage = () => {
         return
     }
     setAlert(false);
-
+    
     const url = "http://localhost:3001/api/createUser";
     try {
       const response = await fetch(url, {
