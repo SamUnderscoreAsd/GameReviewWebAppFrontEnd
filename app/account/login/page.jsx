@@ -11,10 +11,6 @@ const [password, setPassword] = useState('');
 const [alert, setAlert] = useState(false);
 const [alertMessage, setAlertMessage] = useState('');
 
-//email string len <= 320
-//pass string len <= 100
-// user string len <= 20
-
 const autoLogin = async (e) =>{//if the user has an active SessionID cookie, the website will automatically log the user in
 
 }
