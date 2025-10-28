@@ -2,6 +2,7 @@
 import { redirect } from "next/navigation";
 import React from "react";
 import { useState } from "react";
+import Alert from "@/components/alert";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");

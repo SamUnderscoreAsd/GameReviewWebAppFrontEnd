@@ -11,9 +11,9 @@ const [password, setPassword] = useState('');
 const [alert, setAlert] = useState(false);
 const [alertMessage, setAlertMessage] = useState('');
 
-//email string len <= 320
-//pass string len <= 100
-// user string len <= 20
+const autoLogin = async (e) =>{//if the user has an active SessionID cookie, the website will automatically log the user in
+
+}
 
 const handleSubmit = async (e) => {
 
@@ -33,8 +33,10 @@ const handleSubmit = async (e) => {
         return
     }
     setAlert(false);
+
     try{
         const response = await fetch("http://localhost:3001/api/login",{
+            credentials: 'include',
             method: "POST",
             headers: {
                 "Content-Type": "application/Json"
