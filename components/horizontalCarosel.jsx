@@ -1,0 +1,54 @@
+"use client";
+import { use, useRef } from "react";
+import GameCard from "./gameCard";
+
+export default function HorizontalCarosel({ gameList }) {
+  const scrollRef = useRef(null);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeft = useRef(0);
+
+  const handleMouseDown = (e) => {
+    isDragging.current = true;
+    startX.current = e.pageX - scrollRef.current.offsetLeft;
+    scrollLeft.current = scrollRef.current.scrollLeft;
+  };
+
+  const handleMouseMove = (e) => {
+    if (!isDragging.current) return;
+    e.preventDefault();
+    const x = e.pageX - scrollRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1; // Scroll speed multiplier
+    scrollRef.current.scrollLeft = scrollLeft.current - walk;
+  };
+
+  const handleMouseUp = () => {
+    isDragging.current = false;
+  };
+
+  return (
+    <div
+      ref={scrollRef}
+      className="overflow-x-scroll no-scrollbar cursor-grab active:cursor-grabbing"
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
+      <div className="flex gap-4">
+        {gameList.map((game, index) => {
+          return (
+            <div className="flex-shrink-0" key={index}>
+              <GameCard
+                className =""
+                gameName={game.title}
+                rating={game.rating}
+                thumbnail={game.imageUrl}
+              ></GameCard>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}

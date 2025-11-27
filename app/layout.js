@@ -21,20 +21,19 @@ export const metadata = {
 };
 
 export default function accountLayout({ children }) {
-
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex flex-col `}>
-        <header className="bg-green-500 w-full text-center p-6 flex flex-row justify-between">
-          <div>
-            <p className="bg-black-100">{metadata.title}</p>
+    <html lang="en" className="w-screen no-scrollbar">
+      <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
+        <div className="antialiased flex flex-col ">
+          <div className="bg-green-500 w-full text-center py-6 flex flex-row justify-between">
+            <div>
+              <p className="bg-black-100">{metadata.title}</p>
+            </div>
           </div>
-        </header>
 
-        {children}
-        <div className="flex-grow"></div>
-        <footer className="bg-green-500  w-full text-center p-6">FOOTER</footer>
+          <main className="flex-grow">{children}</main>
+          <footer className="bg-green-500 flex w-full text-center p-6"></footer>
+        </div>
       </body>
     </html>
   );
