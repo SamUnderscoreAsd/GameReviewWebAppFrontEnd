@@ -25,7 +25,6 @@ export default function HorizontalCarosel({ gameList }) {
   const handleMouseUp = () => {
     isDragging.current = false;
   };
-
   return (
     <div
       ref={scrollRef}
@@ -41,9 +40,9 @@ export default function HorizontalCarosel({ gameList }) {
             <div className="flex-shrink-0" key={index}>
               <GameCard
                 className =""
-                gameName={game.title}
-                rating={game.rating}
-                thumbnail={game.imageUrl}
+                gameName={game.name ? game.name : ''}
+                rating={game.rating ? game.rating : 0}
+                thumbnail={game.cover?.image_id || 'co1ups'}
               ></GameCard>
             </div>
           );
