@@ -28,13 +28,13 @@ export default function HorizontalCarosel({ gameList }) {
   return (
     <div
       ref={scrollRef}
-      className="overflow-x-scroll no-scrollbar cursor-grab active:cursor-grabbing"
+      className="overflow-x-scroll no-scrollbar cursor-grab active:cursor-grabbing bg-black"
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      <div className="flex gap-4">
+      <div className="flex flex-row gap-4">
         {gameList.map((game, index) => {
           return (
             <div className="flex-shrink-0" key={index}>

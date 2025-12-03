@@ -25,9 +25,9 @@ export default function accountLayout({ children }) {
     <html lang="en" className="w-screen no-scrollbar">
       <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
         <div className="antialiased flex flex-col ">
-          <div className="bg-green-500 w-full text-center py-6 flex flex-row justify-between">
+          <div className="bg-green-500 w-full text-center py-5 flex flex-row justify-between">
             <div>
-              <p className="bg-black-100">{metadata.title}</p>
+              <p className="text-black text-2xl">{metadata.title}</p>
             </div>
           </div>
 
