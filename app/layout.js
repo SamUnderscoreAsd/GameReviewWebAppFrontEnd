@@ -20,19 +20,21 @@ export const metadata = {
   description: "A platform to see and share your options of games.",
 };
 
+const headerFooterColor = 'bg-contrast';
+
 export default function accountLayout({ children }) {
   return (
-    <html lang="en" className="w-screen no-scrollbar">
+    <html lang="en" className="no-scrollbar">
       <body className={`${geistSans.variable} ${geistMono.variable} h-full`}>
         <div className="antialiased flex flex-col ">
-          <div className="bg-green-500 w-full text-center py-5 flex flex-row justify-between">
+          <div className={`${headerFooterColor} w-full text-center py-5 flex flex-row justify-between`}>
             <div>
-              <p className="text-black text-2xl">{metadata.title}</p>
+              <p className="text-black text-2xl mx-5">{metadata.title}</p>
             </div>
           </div>
 
-          <main className="flex-grow">{children}</main>
-          <footer className="bg-green-500 flex w-full text-center p-6"></footer>
+          <main className="w-full bg-background">{children}</main>
+          <footer className={`${headerFooterColor} flex w-full text-center p-6`}></footer>
         </div>
       </body>
     </html>
