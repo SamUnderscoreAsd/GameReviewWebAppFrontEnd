@@ -1,3 +1,4 @@
+import CategorySection from "@/components/categorySection";
 import GameCard from "@/components/gameCard";
 import HorizontalCarosel from "@/components/horizontalCarosel";
 import Image from "next/image";
@@ -26,16 +27,18 @@ export default async function Home() {
   let gameList = await randomGames();
 
   return (
-    <div className="h-auto w-screen flex flex-col">
-      <div className="my-10 w-full h-5/6 text-black flex justify-center items-center text-center">
-        <HorizontalCarosel gameList={gameList}></HorizontalCarosel>
+    <div className="flex flex-row w-full">
+      <div className="flex-1 min-w-[200px]"></div>
+
+      <div className="flex-2 overflow-hidden">
+        <div className="">
+          <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
+          <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
+          <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
+        </div>
       </div>
-      <div className="my-10 w-full h-5/6 text-black flex justify-center items-center text-center">
-        <HorizontalCarosel gameList={gameList}></HorizontalCarosel>
-      </div>
-      <div className="my-10 w-full h-5/6 text-black flex justify-center items-center text-center">
-        <HorizontalCarosel gameList={gameList}></HorizontalCarosel>
-      </div>
+
+      <div className="flex-1 min-w-[200px]"></div>
     </div>
   );
 }
