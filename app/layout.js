@@ -20,7 +20,7 @@ export const metadata = {
   description: "A platform to see and share your options of games.",
 };
 
-const headerFooterColor = 'bg-contrast';
+const headerFooterColor = 'bg-foreground';
 
 export default function accountLayout({ children }) {
   return (
@@ -32,7 +32,7 @@ export default function accountLayout({ children }) {
               <p className="text-black text-2xl mx-5">{metadata.title}</p>
             </div>
           </div>
-
+          <div className="h-2 bg-contrast w-full text-black">.</div>
           <main className="w-full bg-background">{children}</main>
           <footer className={`${headerFooterColor} flex w-full text-center p-6`}></footer>
         </div>

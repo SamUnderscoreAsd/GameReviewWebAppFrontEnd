@@ -32,7 +32,7 @@ export default async function Home() {
 
       <div className="flex-2 overflow-hidden">
         <div className="">
-          <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
+          <CategorySection category={"Good Random Games lol"} gamelist={gameList} ></CategorySection>
           <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
           <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
         </div>
