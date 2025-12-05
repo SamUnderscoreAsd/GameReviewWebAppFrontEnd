@@ -1,21 +1,22 @@
 import CategorySection from "@/components/categorySection";
-import GameCard from "@/components/gameCard";
-import HorizontalCarosel from "@/components/horizontalCarosel";
-import Image from "next/image";
+import { genre, getGenreKey } from "@/components/GameCategories";
 
 export default async function Home() {
-  const randomGames = async () => {
-    const url = "http://localhost:3001/api/get10RandomGames";
+  const getGames = async (category) => {
+    const url = "http://localhost:3001/api/getGames";
     let gameList = undefined;
-
+    //console.log('category is: ' + category);
     try {
       gameList = await fetch(url, {
         method: "POST",
-        header: {
+        headers: {
           "Content-type": "application/json",
         },
+        body:JSON.stringify({
+          category: category,
+        })
       });
-
+      
       let data = await gameList.json();
       //console.log(data);
       return data;
@@ -23,18 +24,21 @@ export default async function Home() {
       console.error(e);
     }
   };
-
-  let gameList = await randomGames();
-
+  //const cat1 = await getGames('random');
+  //const cat2 = await getGames(genre.Simulator);
+  //const cat3 = await getGames(genre.Platform);
+  const length = Object.keys(genre).length;
+  const cat1 = Object.keys(genre)[Math.floor(Math.random() * length)];
+  const cat2 = Object.keys(genre)[Math.floor(Math.random() * length)];
   return (
     <div className="flex flex-row w-full">
       <div className="flex-1 min-w-[200px]"></div>
 
       <div className="flex-2 overflow-hidden">
         <div className="">
-          <CategorySection category={"Good Random Games lol"} gamelist={gameList} ></CategorySection>
-          <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
-          <CategorySection category={"Category"} gamelist={gameList} ></CategorySection>
+          <CategorySection category={"Good Picks"} gamelist={await getGames('random')} ></CategorySection>
+          <CategorySection category={cat1} gamelist={await getGames(genre[cat1])} ></CategorySection>
+          <CategorySection category={cat2} gamelist={await getGames(genre[cat2])} ></CategorySection>
         </div>
       </div>
 
