@@ -15,7 +15,7 @@ export const genre = {
     //Tactical: 24,
     //Trivia: 26,
     HackAndSlash: 25, //Hack and slash/Beat 'em up
-    Pinball: 30,
+    //Pinball: 30,
     Adventure: 31,
     Indie: 32,
     Arcade: 33,

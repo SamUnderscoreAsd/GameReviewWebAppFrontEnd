@@ -42,7 +42,7 @@ export default function HorizontalCarosel({ gameList }) {
                   className="bg-offWhite"
                   gameName={game.name ? game.name : ""}
                   rating={game.rating ? game.rating : 0}
-                  thumbnail={game.cover?.image_id || "co1ups"}
+                  thumbnail={game.cover?.image_id || "0"}
                 ></GameCard>
               </div>
             );
