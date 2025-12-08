@@ -18,7 +18,7 @@ export default async function Home() {
       });
       
       let data = await gameList.json();
-      //console.log(data);
+      console.log(data);
       return data;
     } catch (e) {
       console.error(e);
