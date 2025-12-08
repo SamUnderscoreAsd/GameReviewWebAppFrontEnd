@@ -1,18 +1,21 @@
 
-export async function getGameDetails(gameId) {
-    //console.log('category is: ' + category);
+export async function getGameDetails(requestType, category) {
+    console.log('category is: ' + category);
+    const url = 'http://localhost:3001/api/getGames';
+    var gameInfo;
     try {
-      gameList = await fetch(url, {
+      gameInfo = await fetch(url, {
         method: "POST",
         headers: {
           "Content-type": "application/json",
         },
         body:JSON.stringify({
-          category: category,
+          requestType: requestType,
+          value: category,
         })
       });
       
-      let data = await gameList.json();
+      let data = await gameInfo.json();
       console.log(data);
       return data;
     } catch (e) {

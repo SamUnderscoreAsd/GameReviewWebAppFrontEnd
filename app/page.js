@@ -2,7 +2,7 @@ import CategorySection from "@/components/categorySection";
 import { genre, getGenreKey } from "@/components/GameCategories";
 
 export default async function Home() {
-  const getGames = async (category) => {
+  const getGames = async (requestType, category) => {
     const url = "http://localhost:3001/api/getGames";
     let gameList = undefined;
     //console.log('category is: ' + category);
@@ -13,7 +13,8 @@ export default async function Home() {
           "Content-type": "application/json",
         },
         body:JSON.stringify({
-          category: category,
+          requestType: requestType,
+          value: category,
         })
       });
       
@@ -36,9 +37,9 @@ export default async function Home() {
 
       <div className="flex-2 overflow-hidden">
         <div className="">
-          <CategorySection category={"Good Picks"} gamelist={await getGames('random')} ></CategorySection>
-          <CategorySection category={cat1} gamelist={await getGames(genre[cat1])} ></CategorySection>
-          <CategorySection category={cat2} gamelist={await getGames(genre[cat2])} ></CategorySection>
+          <CategorySection category={"Good Picks"} gamelist={await getGames('random', undefined)} ></CategorySection>
+          <CategorySection category={cat1} gamelist={await getGames(undefined, genre[cat1])} ></CategorySection>
+          <CategorySection category={cat2} gamelist={await getGames(undefined, genre[cat2])} ></CategorySection>
         </div>
       </div>
 
