@@ -1,6 +1,6 @@
 "use client";
 import { use, useRef } from "react";
-import GameCard from "./gameCard";
+import GameCard from "./games/gameCard";
 
 export default function HorizontalCarosel({ gameList }) {
   const scrollRef = useRef(null);

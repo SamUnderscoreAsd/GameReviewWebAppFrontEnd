@@ -1,5 +1,5 @@
 import React from "react";
-import HorizontalCarosel from "./horizontalCarosel";
+import HorizontalCarosel from "../horizontalCarosel";
 
 export default function CategorySection({ category, gamelist }) {
   return (

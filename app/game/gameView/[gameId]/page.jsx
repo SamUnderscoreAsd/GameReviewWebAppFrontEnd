@@ -2,6 +2,7 @@
 import { React,useEffect,useState } from 'react';
 import { getGameDetails } from '@/app/services/api';
 import { useParams } from 'next/navigation';
+import { ReviewCard } from '@/components/reviews/reviewCards';
 
 export default function GameView(){
     const [openDesc, setOpenDesc] = useState(false);
@@ -33,7 +34,7 @@ export default function GameView(){
         }
     }, [gameId]);
 
-    if(loading) return<div className="text-4xl w-full h-full">Loading Game Details...</div>
+    if(loading) return<div className="text-center text-4xl w-full h-full">Loading Game Details...</div>
 
 
     return(
@@ -57,7 +58,9 @@ export default function GameView(){
                     </div>
                 </div>
             </div>
-            <div className="flex-1 bg-blue-500">Description</div>
+            <div className="flex bg-offWhite p-5 rounded-md">
+                <ReviewCard date="2025-12-15" reviewScore={10} reviewContent="KLJLSDLFPLSKDJFLSK:DJFNSDOIJVNOIUSPODJNSLLfj"></ReviewCard>
+            </div>
             
         </div>
     )

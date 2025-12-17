@@ -1,5 +1,5 @@
-import CategorySection from "@/components/categorySection";
-import { genre, getGenreKey } from "@/components/GameCategories";
+import CategorySection from "@/components/games/categorySection";
+import { genre, getGenreKey } from "@/components/games/GameCategories";
 
 export default async function Home() {
   const getGames = async (requestType, category) => {
