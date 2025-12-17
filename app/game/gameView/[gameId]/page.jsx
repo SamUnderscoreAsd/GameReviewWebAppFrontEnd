@@ -1,12 +1,13 @@
 'use client'
 import { React,useEffect,useState } from 'react';
-import { getGameDetails } from '@/app/services/api';
+import { getGameDetails, getReviews } from '@/app/services/api';
 import { useParams } from 'next/navigation';
 import { ReviewCard } from '@/components/reviews/reviewCards';
 
 export default function GameView(){
     const [openDesc, setOpenDesc] = useState(false);
     const [gameInfo, setGameInfo] = useState(null);
+    const [reviews, setReviews] = useState(null);
     const [loading, setLoading] = useState(true);
     const gameId = useParams().gameId; 
 
@@ -16,12 +17,14 @@ export default function GameView(){
         
             try{
                 setLoading(true);
-                const data = await getGameDetails('detail', gameId);
-                setGameInfo(data);
-                console.log(gameInfo);
+                const gameData = await getGameDetails('detail', gameId);
+                const reviewData = await getReviews('games',gameId);
+                setGameInfo(gameData);
+                setReviews(reviewData);
             }
             catch(e){
                 console.log("Failed to get game details\n" + gameInfo)
+                console.error(e);
             }finally{
                 setLoading(false);
             }
@@ -58,8 +61,9 @@ export default function GameView(){
                     </div>
                 </div>
             </div>
-            <div className="flex bg-offWhite p-5 rounded-md">
+            <div className="flex flex-col bg-offWhite p-5 rounded-md">
                 <ReviewCard date="2025-12-15" reviewScore={10} reviewContent="KLJLSDLFPLSKDJFLSK:DJFNSDOIJVNOIUSPODJNSLLfj"></ReviewCard>
+                <ReviewCard date={new Date(reviews[0].dateCreated).toLocaleDateString()} reviewScore={reviews[0].reviewScore} reviewContent={reviews[0].review} username={reviews[0].username}></ReviewCard>
             </div>
             
         </div>

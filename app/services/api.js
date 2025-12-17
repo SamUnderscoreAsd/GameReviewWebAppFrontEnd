@@ -84,3 +84,24 @@ export async function login(username,password){
         console.error(e);
     }
 }
+
+export async function getReviews(requestType, id){
+  var url = "http://localhost:3001/api/getReviews"
+  try{
+    const data = await fetch(url, {
+      method: "POST",
+      headers:{
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        requestType: requestType,
+        id: id,
+      })
+    });
+
+    return await data.json();
+  }catch(e){
+    console.error(e);
+  };
+
+};
