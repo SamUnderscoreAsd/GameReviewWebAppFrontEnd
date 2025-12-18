@@ -3,6 +3,7 @@ import { React,useEffect,useState } from 'react';
 import { getGameDetails, getReviews } from '@/app/services/api';
 import { useParams } from 'next/navigation';
 import { ReviewCard } from '@/components/reviews/reviewCards';
+import { ReviewDisplay } from '@/components/reviews/reviewDisplay';
 
 export default function GameView(){
     const [openDesc, setOpenDesc] = useState(false);
@@ -62,8 +63,7 @@ export default function GameView(){
                 </div>
             </div>
             <div className="flex flex-col bg-offWhite p-5 rounded-md">
-                <ReviewCard date="2025-12-15" reviewScore={10} reviewContent="KLJLSDLFPLSKDJFLSK:DJFNSDOIJVNOIUSPODJNSLLfj"></ReviewCard>
-                <ReviewCard date={new Date(reviews[0].dateCreated).toLocaleDateString()} reviewScore={reviews[0].reviewScore} reviewContent={reviews[0].review} username={reviews[0].username}></ReviewCard>
+                <ReviewDisplay reviewList={reviews}/>
             </div>
             
         </div>
