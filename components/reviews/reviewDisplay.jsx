@@ -2,8 +2,6 @@ import { ReviewCard } from "./reviewCards";
 
 
 export function ReviewDisplay({reviewList}){
-    console.log(reviewList);
-    console.log(reviewList.length)
 
     if(reviewList.length <= 0){
         return(
