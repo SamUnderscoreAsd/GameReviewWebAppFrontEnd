@@ -1,16 +1,24 @@
 'use client'
 import { React,useEffect,useState } from 'react';
-import { getGameDetails, getReviews } from '@/app/services/api';
+import { getGameDetails, getReviews, createReviews } from '@/app/services/api';
 import { useParams } from 'next/navigation';
-import { ReviewCard } from '@/components/reviews/reviewCards';
 import { ReviewDisplay } from '@/components/reviews/reviewDisplay';
-import '@toast-ui/editor/dist/toastui-editor.css';
-import { Editor } from '@toast-ui/react-editor';
+import Editor, {
+  BtnBold,
+  BtnItalic,
+  BtnUnderline,
+  BtnStrikeThrough,
+  BtnBulletList,
+  BtnNumberedList,
+  BtnLink,
+  Toolbar,
+} from "react-simple-wysiwyg";
 
 export default function GameView(){
     const [openDesc, setOpenDesc] = useState(false);
     const [gameInfo, setGameInfo] = useState(null);
     const [reviews, setReviews] = useState(null);
+    const [currentReview, setCurrentReview] = useState(null);
     const [loading, setLoading] = useState(true);
     const gameId = useParams().gameId; 
 
@@ -42,7 +50,10 @@ export default function GameView(){
 
     if(loading) return<div className="text-black text-center justify-center text-4xl w-full h-screen">Loading Game Details...</div>
 
-    const onSubmitHandler = ()=>{
+    const onSubmitHandler = async (e)=>{
+        await createReviews(document.cookie.UserId, gameId, currentReview, 10);
+
+        console.log(currentReview);
 
     }
 
@@ -84,24 +95,22 @@ export default function GameView(){
         </div>
         <div className="flex flex-col bg-offWhite p-5 rounded-md">
           <div className="text-3xl mb-5">Reviews</div>
-          <form>
+          <form onSubmit={onSubmitHandler}>
             <div className="bg-offWhite">
-              <Editor
-                initialValue="Write your review here!"
-                height="250px"
-                initialEditType="markdown"
-                hideModeSwitch={true}
-                useCommandShortcut={true}
-                toolbarItems={[
-                  ["heading", "bold", "italic", "strike"],
-                  ["hr", "quote"],
-                  ["ul", "ol"],
-                  ["link"],
-                ]}
-              />
+              <Editor value={currentReview} onChange={(e) => setCurrentReview(e.target.value)} placeholder='Write your review here!'>
+                <Toolbar>
+                  <BtnBold />
+                  <BtnItalic />
+                  <BtnUnderline />
+                  <BtnStrikeThrough />
+                  <BtnBulletList />
+                  <BtnNumberedList />
+                  <BtnLink />
+                </Toolbar>
+              </Editor>
             </div>
 
-            <button type="submit" onClick={onSubmitHandler}>
+            <button className="bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-blue-600" type="submit">
               Submit
             </button>
           </form>

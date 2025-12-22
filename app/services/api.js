@@ -105,3 +105,30 @@ export async function getReviews(requestType, id){
   };
 
 };
+
+export async function createReviews(id, gameId, review, reviewScore){
+  var url ="http://localhost:3001/api/createReview"
+
+  console.log('attempting to send the request for new review')
+  try{
+    const data = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        user: {
+          id: id,
+        },
+        gameId: gameId,
+        review: review,
+        reviewScore: reviewScore,
+      }),
+    });
+    //console.log(data);
+  }catch(e){
+    console.error(e);
+  };
+
+};
