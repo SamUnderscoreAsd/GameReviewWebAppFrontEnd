@@ -13,12 +13,14 @@ import Editor, {
   BtnLink,
   Toolbar,
 } from "react-simple-wysiwyg";
+import { ReviewScoreInput } from '@/components/reviews/reviewScoreInput';
 
 export default function GameView(){
     const [openDesc, setOpenDesc] = useState(false);
     const [gameInfo, setGameInfo] = useState(null);
     const [reviews, setReviews] = useState(null);
     const [currentReview, setCurrentReview] = useState(null);
+    const [reviewScore, setReviewScore] = useState(0);
     const [loading, setLoading] = useState(true);
     const gameId = useParams().gameId; 
 
@@ -51,10 +53,19 @@ export default function GameView(){
     if(loading) return<div className="text-black text-center justify-center text-4xl w-full h-screen">Loading Game Details...</div>
 
     const onSubmitHandler = async (e)=>{
-        await createReviews(document.cookie.UserId, gameId, currentReview, 10);
-
+        e.preventDefault();
+        
+      try{
+        console.log("The review score is now "+reviewScore)
+        await createReviews(document.cookie.UserId, gameId, currentReview, reviewScore);
         console.log(currentReview);
 
+        console.log("refreshing the reviews ")
+        const reviewData = await getReviews('games',gameId);
+        setReviews(reviewData);
+      }catch(e){
+        console.log(error);
+      }
     }
 
     return (
@@ -81,14 +92,14 @@ export default function GameView(){
               <div className="text-2xl">Description</div>
               <div className="overflow-hidden text-ellipsis w-full h-full max-h-60">
                 {gameInfo[0].summary}
-                <button
+                {/* <button
                   className="hover:underline"
                   onClick={() => {
                     setOpenDesc(openDesc ? false : true);
                   }}
                 >
                   {openDesc ? "collapse" : "expand"}
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -96,6 +107,12 @@ export default function GameView(){
         <div className="flex flex-col bg-offWhite p-5 rounded-md">
           <div className="text-3xl mb-5">Reviews</div>
           <form onSubmit={onSubmitHandler}>
+            <div className='flex justify-between items-center'>
+              <ReviewScoreInput passDataToParent={setReviewScore}></ReviewScoreInput>
+              <button className="bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-blue-600" type="submit">
+              Submit
+            </button>
+            </div>
             <div className="bg-offWhite">
               <Editor value={currentReview} onChange={(e) => setCurrentReview(e.target.value)} placeholder='Write your review here!'>
                 <Toolbar>
@@ -110,9 +127,6 @@ export default function GameView(){
               </Editor>
             </div>
 
-            <button className="bg-blue-500 p-3 mb-3 text-center rounded-md hover:bg-blue-600" type="submit">
-              Submit
-            </button>
           </form>
           <ReviewDisplay reviewList={reviews} />
         </div>
