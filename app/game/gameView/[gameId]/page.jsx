@@ -3,6 +3,7 @@ import { React,useEffect,useState } from 'react';
 import { getGameDetails, getReviews, createReviews } from '@/app/services/api';
 import { useParams } from 'next/navigation';
 import { ReviewDisplay } from '@/components/reviews/reviewDisplay';
+import { ReviewScoreInput } from '@/components/reviews/reviewScoreInput';
 import Editor, {
   BtnBold,
   BtnItalic,
@@ -13,16 +14,17 @@ import Editor, {
   BtnLink,
   Toolbar,
 } from "react-simple-wysiwyg";
-import { ReviewScoreInput } from '@/components/reviews/reviewScoreInput';
+import { Filter } from 'bad-words'
 
 export default function GameView(){
-    const [openDesc, setOpenDesc] = useState(false);
+    //const [openDesc, setOpenDesc] = useState(false);
     const [gameInfo, setGameInfo] = useState(null);
     const [reviews, setReviews] = useState(null);
     const [currentReview, setCurrentReview] = useState(null);
     const [reviewScore, setReviewScore] = useState(0);
     const [loading, setLoading] = useState(true);
     const gameId = useParams().gameId; 
+    const filter = new Filter();
 
     useEffect(()=>{
 
@@ -53,16 +55,10 @@ export default function GameView(){
     if(loading) return<div className="text-black text-center justify-center text-4xl w-full h-screen">Loading Game Details...</div>
 
     const onSubmitHandler = async (e)=>{
-        e.preventDefault();
-        
+        //e.preventDefault(); //prevents refreshes
+        //TODO FIX FUCKASS REFRESHING with review data not always including the newly made review
       try{
-        console.log("The review score is now "+reviewScore)
-        await createReviews(document.cookie.UserId, gameId, currentReview, reviewScore);
-        console.log(currentReview);
-
-        console.log("refreshing the reviews ")
-        const reviewData = await getReviews('games',gameId);
-        setReviews(reviewData);
+        await createReviews(document.cookie.UserId, gameId, filter.clean(currentReview), reviewScore);
       }catch(e){
         console.log(error);
       }

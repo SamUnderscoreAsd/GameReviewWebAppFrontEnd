@@ -90,8 +90,9 @@ export async function getReviews(requestType, id){
   try{
     const data = await fetch(url, {
       method: "POST",
+      cache: 'reload',
       headers:{
-        "Content-type": "application/json"
+        "Content-type": "application/json",
       },
       body: JSON.stringify({
         requestType: requestType,
