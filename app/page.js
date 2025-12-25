@@ -1,41 +1,26 @@
-import GameCard from "@/components/gameCard";
-import HorizontalCarosel from "@/components/horizontalCarosel";
-import Image from "next/image";
+import CategorySection from "@/components/games/categorySection";
+import { genre, getGenreKey } from "@/components/games/GameCategories";
+import { getGameDetails } from "./services/api";
 
 export default async function Home() {
-  const randomGames = async () => {
-    const url = "http://localhost:3001/api/get10RandomGames";
-    let gameList = undefined;
 
-    try {
-      gameList = await fetch(url, {
-        method: "POST",
-        header: {
-          "Content-type": "application/json",
-        },
-      });
-
-      let data = await gameList.json();
-      //console.log(data);
-      return data;
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
-  let gameList = await randomGames();
+  const length = Object.keys(genre).length;
+  const cat1 = Object.keys(genre)[Math.floor(Math.random() * length)];
+  const cat2 = Object.keys(genre)[Math.floor(Math.random() * length)];
 
   return (
-    <div className="h-auto w-screen flex flex-col">
-      <div className="my-10 w-full h-5/6 text-black flex justify-center items-center text-center">
-        <HorizontalCarosel gameList={gameList}></HorizontalCarosel>
+    <div className="flex flex-row w-full">
+      <div className="flex-1 min-w-[200px]"></div>
+
+      <div className="flex-2 overflow-hidden">
+        <div className="">
+          <CategorySection category={"Good Picks"} gamelist={await getGameDetails('random', undefined)} ></CategorySection>
+          <CategorySection category={cat1} gamelist={await getGameDetails(undefined, genre[cat1])} ></CategorySection>
+          <CategorySection category={cat2} gamelist={await getGameDetails(undefined, genre[cat2])} ></CategorySection>
+        </div>
       </div>
-      <div className="my-10 w-full h-5/6 text-black flex justify-center items-center text-center">
-        <HorizontalCarosel gameList={gameList}></HorizontalCarosel>
-      </div>
-      <div className="my-10 w-full h-5/6 text-black flex justify-center items-center text-center">
-        <HorizontalCarosel gameList={gameList}></HorizontalCarosel>
-      </div>
+
+      <div className="flex-1 min-w-[200px]"></div>
     </div>
   );
 }

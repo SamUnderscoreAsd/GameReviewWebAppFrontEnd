@@ -1,8 +1,9 @@
 "use client";
-import { redirect } from "next/navigation";
+
 import React from "react";
 import { useState } from "react";
 import Alert from "@/components/alert";
+import { registerUser } from "@/app/services/api";
 
 const RegisterPage = () => {
   const [username, setUsername] = useState("");
@@ -31,33 +32,7 @@ const RegisterPage = () => {
     }
     setAlert(false);
     
-    const url = "http://localhost:3001/api/createUser";
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({
-          user: {
-            username: username,
-            email: email,
-            password: password,
-          },
-        }),
-      });
-
-
-      if (response.ok){
-        console.log("response.ok = " + response.ok)
-        redirect("/");
-      }
-    } catch (e) {
-      if (e.digest?.includes("NEXT_REDIRECT")) {
-          throw e;
-        }
-      console.error(e);
-    }
+    await registerUser(username, email, password);
   };
 
   return (

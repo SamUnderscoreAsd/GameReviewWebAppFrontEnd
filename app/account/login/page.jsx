@@ -1,7 +1,7 @@
 'use client'
 
+import { login } from '@/app/services/api';
 import Alert from '@/components/alert';
-import { redirect } from 'next/navigation';
 import React from 'react'
 import { useState } from 'react'
 
@@ -11,16 +11,9 @@ const [password, setPassword] = useState('');
 const [alert, setAlert] = useState(false);
 const [alertMessage, setAlertMessage] = useState('');
 
-const autoLogin = async (e) =>{//if the user has an active SessionID cookie, the website will automatically log the user in
-
-}
-
 const handleSubmit = async (e) => {
 
     e.preventDefault()
-
-    // console.log(username);
-    // console.log(password);
 
     if(username.length > 20 || username.length < 1){
         setAlert(true);
@@ -34,34 +27,7 @@ const handleSubmit = async (e) => {
     }
     setAlert(false);
 
-    try{
-        const response = await fetch("http://localhost:3001/api/login",{
-            credentials: 'include',
-            method: "POST",
-            headers: {
-                "Content-Type": "application/Json"
-            },
-            body: JSON.stringify({
-                user: {
-                    username : username,
-                    password : password
-                }
-            }) 
-        })
-
-        const data = await response.json();
-        if (data) {
-            //meaning that if the use is properly authenticated
-            console.log(data + "Sending user to home page");
-            redirect("/");
-        }
-    }
-    catch(e){
-        if (e.digest?.includes("NEXT_REDIRECT")) {
-          throw e;
-        }
-        console.error(e);
-    }
+    await login(username, password);
 
 }
 

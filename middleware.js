@@ -42,10 +42,11 @@ export default async function validateLoggedIn(request){
 
 };
 
+//TODO: LEARN REGEX
 export const config = {
     matcher: [
-        '/',
-        '/((?!account))'
+        '/game/:path*',
+        '/((?!account|_next|api|favicon.ico).+)'
     ]
 }
 
