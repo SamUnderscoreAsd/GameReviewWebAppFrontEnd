@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation";
 
 export async function getGameDetails(requestType, category) {
-    const url = 'http://localhost:3001/api/getGames';
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/getGames`;
     var gameInfo;
     try {
       gameInfo = await fetch(url, {
@@ -25,7 +25,7 @@ export async function getGameDetails(requestType, category) {
   
   export async function registerUser(username, email, password){
 
-  const url = "http://localhost:3001/api/createUser";
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/createUser`;
     try {
       const response = await fetch(url, {
         method: "POST",
@@ -55,8 +55,10 @@ export async function getGameDetails(requestType, category) {
 };
 
 export async function login(username,password){
+  const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/login`;
+
   try{
-        const response = await fetch("http://localhost:3001/api/login",{
+        const response = await fetch(url,{
             credentials: 'include',
             method: "POST",
             headers: {
@@ -86,7 +88,7 @@ export async function login(username,password){
 }
 
 export async function getReviews(requestType, id){
-  var url = "http://localhost:3001/api/getReviews"
+  var url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/getReviews`;
   try{
     const data = await fetch(url, {
       method: "POST",
@@ -108,7 +110,7 @@ export async function getReviews(requestType, id){
 };
 
 export async function createReviews(id, gameId, review, reviewScore){
-  var url ="http://localhost:3001/api/createReview"
+  var url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/createReview`;
 
   console.log('attempting to send the request for new review')
   try{
