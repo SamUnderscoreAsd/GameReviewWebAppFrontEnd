@@ -6,11 +6,11 @@ export default async function validateLoggedIn(request){
 
     if(!sessionID){
         console.log('routing to login page');
-        return NextResponse.redirect(new URL('/account/login', process.env.NEXT_PUBLIC_BACKEND_URL))
+        return NextResponse.redirect(new URL('/account/login', process.env.NEXT_PUBLIC_FRONTEND_URL))
     }
 
     //access the DB to verify the session is actually valid
-    const url = `${NEXT_PUBLIC_BACKEND_URL}/api/retreiveSession`
+    const url = `${NEXT_PUBLIC_FRONTEND_URL}/api/retreiveSession`
 
     try{
 
