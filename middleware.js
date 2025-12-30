@@ -6,14 +6,16 @@ export default async function validateLoggedIn(request){
 
     if(!sessionID){
         console.log('routing to login page');
-        return NextResponse.redirect(new URL('/account/login','http://localhost:3000'))
+        return NextResponse.redirect(new URL('/account/login', process.env.NEXT_PUBLIC_BACKEND_URL))
     }
 
     //access the DB to verify the session is actually valid
+    const url = `${NEXT_PUBLIC_BACKEND_URL}/api/retreiveSession`
+
     try{
 
         const response = await fetch(
-          "http://localhost:3001/api/retreiveSession",
+          url,
           {
             method: "POST",
             headers: {
