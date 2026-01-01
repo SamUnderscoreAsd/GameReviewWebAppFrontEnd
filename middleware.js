@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server'
 export default async function validateLoggedIn(request){
 
     const sessionID = request.cookies.get('SessionID')?.value;
+    console.log("sessionID cookie: ", sessionID);
 
     if(!sessionID){
         console.log('routing to login page');
@@ -29,6 +30,7 @@ export default async function validateLoggedIn(request){
         )
 
         const data = await response.json();
+        console.log(data);
 
         if(data.expires < Date.now()){
             console.log('sending the user back to login page')
