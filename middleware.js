@@ -6,7 +6,7 @@ export default async function validateLoggedIn(request){
 
     if(!sessionID){
         console.log('routing to login page');
-        return NextResponse.redirect(new URL('/account/login', process.env.NEXT_PUBLIC_FRONTEND_URL))
+        return NextResponse.redirect(new URL('/account/login', request.url))
     }
 
     //access the DB to verify the session is actually valid
@@ -18,6 +18,7 @@ export default async function validateLoggedIn(request){
           url,
           {
             method: "POST",
+            credentials: 'include',
             headers: {
               "Content-type": "application/JSON",
             },
