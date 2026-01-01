@@ -10,7 +10,7 @@ export default async function validateLoggedIn(request){
     }
 
     //access the DB to verify the session is actually valid
-    const url = `${NEXT_PUBLIC_FRONTEND_URL}/api/retreiveSession`
+    const url = `${process.env.NEXT_PUBLIC_FRONTEND_URL}/api/retreiveSession` 
 
     try{
 

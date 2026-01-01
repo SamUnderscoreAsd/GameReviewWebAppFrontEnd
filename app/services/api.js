@@ -6,6 +6,7 @@ export async function getGameDetails(requestType, category) {
     try {
       gameInfo = await fetch(url, {
         method: "POST",
+        credentials: "include",
         headers: {
           "Content-type": "application/json",
         },
@@ -29,6 +30,7 @@ export async function getGameDetails(requestType, category) {
     try {
       const response = await fetch(url, {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-type": "application/json",
         },
@@ -93,6 +95,7 @@ export async function getReviews(requestType, id){
     const data = await fetch(url, {
       method: "POST",
       cache: 'reload',
+      credentials: "include",
       headers:{
         "Content-type": "application/json",
       },
