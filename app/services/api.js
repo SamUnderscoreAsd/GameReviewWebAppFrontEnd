@@ -43,11 +43,9 @@ export async function getGameDetails(requestType, category) {
         }),
       });
 
-      const data = await response.json();
 
       if (response.ok){
-        document.cookie = `SessionID=${data.sessionID}; max-age=604800; path=/; secure; samesite=strict`;
-        console.log(data.message, "\nSending user to homepage")
+        console.log("response.ok = " + response.ok)
         redirect("/");
       }
     } catch (e) {
@@ -77,11 +75,9 @@ export async function login(username,password){
         })
 
         const data = await response.json();
-
         if (data) {
-            //meaning that if the use is properly authenticate
-            document.cookie = `SessionID=${data.sessionID}; max-age=604800; path=/; secure; samesite=strict`;
-            console.log(data + "\nSending user to home page");
+            //meaning that if the use is properly authenticated
+            console.log(data + "Sending user to home page");
             redirect("/");
         }
     }
