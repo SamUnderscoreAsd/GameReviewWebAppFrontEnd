@@ -138,3 +138,26 @@ export async function createReviews(id, gameId, review, reviewScore){
   };
 
 };
+
+export async function validateLoggedIn(){
+
+    const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/validateSession` 
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/JSON",
+        },
+      });
+
+      const data = await response.json();
+      console.log(data);
+      return data.isValid;
+    } catch (err) {
+      if (err.digest?.includes("NEXT_REDIRECT")) {
+        throw err;
+      }
+      console.error(err);
+    }
+};

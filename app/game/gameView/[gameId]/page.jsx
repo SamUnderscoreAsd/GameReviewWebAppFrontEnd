@@ -1,6 +1,7 @@
 'use client'
 import { React,useEffect,useState } from 'react';
-import { getGameDetails, getReviews, createReviews } from '@/app/services/api';
+import { useRouter } from 'next/navigation';
+import { getGameDetails, getReviews, createReviews, validateLoggedIn } from '@/app/services/api';
 import { useParams } from 'next/navigation';
 import { ReviewDisplay } from '@/components/reviews/reviewDisplay';
 import { ReviewScoreInput } from '@/components/reviews/reviewScoreInput';
@@ -25,17 +26,26 @@ export default function GameView(){
     const [loading, setLoading] = useState(true);
     const gameId = useParams().gameId; 
     const filter = new Filter();
+    const router = new useRouter();
 
     useEffect(()=>{
 
         async function gameDetails (){
         
             try{
-                setLoading(true);
-                const gameData = await getGameDetails('detail', gameId);
-                const reviewData = await getReviews('games',gameId);
-                setGameInfo(gameData);
-                setReviews(reviewData);
+
+              console.log("going to attempt to validate login: ");
+              const isLoggedIn = await validateLoggedIn();
+              console.log(`finished attemping to validate Login`, isLoggedIn);
+              if(!isLoggedIn){
+                router.push('/account/login');
+              }
+
+              setLoading(true);
+              const gameData = await getGameDetails("detail", gameId);
+              const reviewData = await getReviews("games", gameId);
+              setGameInfo(gameData);
+              setReviews(reviewData);
             }
             catch(e){
                 console.log("Failed to get game details\n" + gameInfo)
