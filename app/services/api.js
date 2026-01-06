@@ -161,3 +161,27 @@ export async function validateLoggedIn(){
       console.error(err);
     }
 };
+
+export async function searchGames(searchString){
+const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/getGames`;
+    var gameInfo;
+    try {
+      gameInfo = await fetch(url, {
+        method: "POST",
+        credentials: "include",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body:JSON.stringify({
+          requestType: "search",
+          value: searchString,
+        })
+      });
+      
+      let data = await gameInfo.json();
+      console.log("I just finished attempting hitting this api endpoint");
+      return data;
+    } catch (e) {
+      console.error(e);
+    }
+};
