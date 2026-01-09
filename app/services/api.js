@@ -179,7 +179,6 @@ const url = `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/getGames`;
       });
       
       let data = await gameInfo.json();
-      console.log("I just finished attempting hitting this api endpoint");
       return data;
     } catch (e) {
       console.error(e);
