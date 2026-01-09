@@ -1,6 +1,7 @@
 import CategorySection from "@/components/games/categorySection";
 import { genre, getGenreKey } from "@/components/games/GameCategories";
 import { getGameDetails } from "./services/api";
+import SearchBar from "@/components/searchBar";
 
 export default async function Home() {
 
@@ -13,6 +14,7 @@ export default async function Home() {
       <div className="flex-1 min-w-[200px]"></div>
 
       <div className="flex-2 overflow-hidden">
+        <SearchBar/>
         <div className="">
           <CategorySection category={"Good Picks"} gamelist={await getGameDetails('random', undefined)} ></CategorySection>
           <CategorySection category={cat1} gamelist={await getGameDetails(undefined, genre[cat1])} ></CategorySection>
