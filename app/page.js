@@ -14,7 +14,7 @@ export default async function Home() {
       <div className="flex-1 min-w-[200px]"></div>
 
       <div className="flex-2 overflow-hidden">
-        <SearchBar></SearchBar>
+        <SearchBar/>
         <div className="">
           <CategorySection category={"Good Picks"} gamelist={await getGameDetails('random', undefined)} ></CategorySection>
           <CategorySection category={cat1} gamelist={await getGameDetails(undefined, genre[cat1])} ></CategorySection>
